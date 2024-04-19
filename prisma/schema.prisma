@@ -26,7 +26,9 @@ model accounts {
     scope             String?
     session_state     String?
     token_type        String?
-    deleted           DateTime?
+    createdAt         DateTime  @default(now())
+    updatedAt         DateTime  @updatedAt
+    deletedAt         DateTime?
 }
 
 model sessions {
@@ -34,14 +36,33 @@ model sessions {
     userId       Int
     expires      DateTime  @db.Timestamptz()
     sessionToken String    @db.VarChar(255)
-    deleted      DateTime?
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
+    deletedAt    DateTime?
+}
+
+model userType {
+    id        Int       @id @default(autoincrement())
+    name      String    @db.VarChar(255)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+    users     users[]
 }
 
 model users {
     id            Int       @id @default(autoincrement())
+    usertypeId    Int
+    userTypes     userType  @relation(fields: [usertypeId], references: [id])
     name          String?   @db.VarChar(255)
     email         String    @db.VarChar(255)
     emailVerified DateTime? @db.Timestamptz()
+    age           Int
     image         String?
-    deleted       DateTime?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    deletedAt     DateTime?
+
+    @@unique([usertypeId, email])
+    @@index([usertypeId, email])
 }
