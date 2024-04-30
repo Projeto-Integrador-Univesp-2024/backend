@@ -47,13 +47,11 @@ model userType {
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
-    users     users[]
 }
 
 model users {
     id            Int       @id @default(autoincrement())
     usertypeId    Int
-    userTypes     userType  @relation(fields: [usertypeId], references: [id])
     name          String?   @db.VarChar(255)
     email         String    @db.VarChar(255)
     emailVerified DateTime? @db.Timestamptz()
@@ -65,4 +63,13 @@ model users {
 
     @@unique([usertypeId, email])
     @@index([usertypeId, email])
+}
+
+model child {
+    id        Int       @id @default(autoincrement())
+    userId    Int
+    points    Int       @default(0)
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
 }

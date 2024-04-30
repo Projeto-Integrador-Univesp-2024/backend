@@ -3,8 +3,15 @@ import { Module } from '@nestjs/common';
 import { AccountModule } from './modules/account/account.module';
 import { SessionsModule } from './modules/sessions/sessions.module';
 import { UserModule } from './modules/user/user.module';
+import { ChildModule } from './modules/child/child.module';
 
 @Module({
-	imports: [PrismaModule, AccountModule, SessionsModule, UserModule],
+	imports: [
+		PrismaModule,
+		AccountModule,
+		SessionsModule,
+		UserModule,
+		ChildModule,
+	],
 })
 export class AppModule {}
