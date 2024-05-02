@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt } from 'class-validator';
+import { IsInt, IsOptional } from 'class-validator';
 
 export class CreateChildDto {
 	@ApiProperty()
@@ -8,5 +8,6 @@ export class CreateChildDto {
 
 	@ApiProperty()
 	@IsInt()
-	points: number;
+	@IsOptional()
+	points?: number;
 }

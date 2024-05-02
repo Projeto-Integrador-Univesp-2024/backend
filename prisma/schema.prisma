@@ -13,7 +13,7 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model accounts {
+model Accounts {
     id                Int       @id @default(autoincrement())
     userId            Int
     type              String    @db.VarChar(255)
@@ -29,9 +29,11 @@ model accounts {
     createdAt         DateTime  @default(now())
     updatedAt         DateTime  @updatedAt
     deletedAt         DateTime?
+
+    user Users @relation(fields: [userId], references: [id])
 }
 
-model sessions {
+model Sessions {
     id           Int       @id @default(autoincrement())
     userId       Int
     expires      DateTime  @db.Timestamptz()
@@ -39,37 +41,49 @@ model sessions {
     createdAt    DateTime  @default(now())
     updatedAt    DateTime  @updatedAt
     deletedAt    DateTime?
+
+    user Users @relation(fields: [userId], references: [id])
 }
 
-model userType {
+model UserType {
     id        Int       @id @default(autoincrement())
     name      String    @db.VarChar(255)
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
+    users     Users[]
+
+    @@unique([name])
 }
 
-model users {
-    id            Int       @id @default(autoincrement())
+model Users {
+    id            Int        @id @default(autoincrement())
     usertypeId    Int
-    name          String?   @db.VarChar(255)
-    email         String    @db.VarChar(255)
-    emailVerified DateTime? @db.Timestamptz()
+    name          String?    @db.VarChar(255)
+    email         String     @db.VarChar(255)
+    emailVerified DateTime?  @db.Timestamptz()
     age           Int
     image         String?
-    createdAt     DateTime  @default(now())
-    updatedAt     DateTime  @updatedAt
+    createdAt     DateTime   @default(now())
+    updatedAt     DateTime   @updatedAt
     deletedAt     DateTime?
+    accounts      Accounts[]
+    sessions      Sessions[]
+    children      Child[]
+
+    userType UserType @relation(fields: [usertypeId], references: [id])
 
     @@unique([usertypeId, email])
     @@index([usertypeId, email])
 }
 
-model child {
+model Child {
     id        Int       @id @default(autoincrement())
     userId    Int
     points    Int       @default(0)
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
+
+    user Users @relation(fields: [userId], references: [id])
 }

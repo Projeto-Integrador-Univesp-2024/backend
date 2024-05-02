@@ -22,9 +22,19 @@ export class UserController {
 		return this.userService.create(_createUserDto);
 	}
 
+	@Get('/userType')
+	findAllUserTypes() {
+		return this.userService.findAllUserType();
+	}
+
 	@Get()
 	findAll() {
 		return this.userService.findAll();
+	}
+
+	@Get('/userType/:name')
+	findOneByNameUserType(@Param('name') name: string) {
+		return this.userService.findOneByNameUserType(name);
 	}
 
 	@Get(':id')
