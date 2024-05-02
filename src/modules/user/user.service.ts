@@ -13,6 +13,18 @@ export class UserService {
 		});
 	}
 
+	findAllUserType() {
+		return this.prisma.userType.findMany();
+	}
+
+	findOneByNameUserType(name: string) {
+		return this.prisma.userType.findFirstOrThrow({
+			where: {
+				name,
+			},
+		});
+	}
+
 	findAll() {
 		return this.prisma.users.findMany();
 	}
@@ -21,6 +33,15 @@ export class UserService {
 		return this.prisma.users.findFirstOrThrow({
 			where: {
 				id,
+			},
+		});
+	}
+
+	findOneByEmailAndUserType(email: string, usertypeId: number) {
+		return this.prisma.users.findFirst({
+			where: {
+				email,
+				usertypeId,
 			},
 		});
 	}
