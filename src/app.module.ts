@@ -5,10 +5,12 @@ import { SessionsModule } from './modules/sessions/sessions.module';
 import { UserModule } from './modules/user/user.module';
 import { ChildModule } from './modules/child/child.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
 	imports: [
 		PrismaModule,
+		MailModule,
 		AccountModule,
 		SessionsModule,
 		UserModule,
