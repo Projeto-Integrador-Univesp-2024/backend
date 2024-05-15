@@ -11,6 +11,8 @@ import { AuthService } from './auth.service';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { ValidateEmailAuthDto } from './dto/validate-email-auth.dto';
+import { ValidateOTPAuthDto } from './dto/validate-otp-auth.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -20,6 +22,16 @@ export class AuthController {
 	@Post()
 	create(@Body() _createAuthDto: CreateAuthDto) {
 		return this.authService.create(_createAuthDto);
+	}
+
+	@Post('/login')
+	validateEmail(@Body() _validateEmailAuthDto: ValidateEmailAuthDto) {
+		return this.authService.validateEmail(_validateEmailAuthDto.email);
+	}
+
+	@Post('/login/confirmation')
+	validateOTP(@Body() _validateOTPAuthDto: ValidateOTPAuthDto) {
+		return this.authService.validateOTP(_validateOTPAuthDto);
 	}
 
 	@Get()

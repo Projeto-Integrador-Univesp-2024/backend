@@ -19,6 +19,23 @@ export class AccountService {
 		});
 	}
 
+	findOneByAccessTokenAndUserId(access_token: string, userId: number) {
+		return this.prisma.accounts.findFirst({
+			where: {
+				access_token,
+				userId,
+			},
+		});
+	}
+
+	findOneByUserId(userId: number) {
+		return this.prisma.accounts.findFirst({
+			where: {
+				userId,
+			},
+		});
+	}
+
 	create(_createAccountDto: CreateAccountDto) {
 		return this.prisma.accounts.create({
 			data: _createAccountDto,
@@ -26,6 +43,7 @@ export class AccountService {
 	}
 
 	update(id: number, _updateAccountDto: UpdateAccountDto) {
+		console.log(id, _updateAccountDto);
 		return this.prisma.accounts.update({
 			where: {
 				id,
