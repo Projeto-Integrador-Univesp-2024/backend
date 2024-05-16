@@ -18,9 +18,12 @@ export class ChildService {
 	}
 
 	findOne(id: number) {
-		return this.prisma.child.findFirstOrThrow({
+		return this.prisma.child.findUnique({
 			where: {
 				id,
+			},
+			include: {
+				user: true,
 			},
 		});
 	}
