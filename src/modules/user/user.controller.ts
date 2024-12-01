@@ -1,29 +1,43 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Get,
+	HttpStatus,
+	Param,
+	Post,
+	UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateUserDto } from './dto/create-user.dto';
+import { JwtGuard } from 'src/guards/jwt.guard';
 
 @ApiTags('User')
 @Controller('user')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
-	@Get('/userType')
-	findAllUserTypes() {
-		return this.userService.findAllUserType();
+	@Post()
+	public async create(@Body() _createUserDto: CreateUserDto) {
+		const user = await this.userService.create(_createUserDto);
+
+		return {
+			data: user,
+			message: 'User created successfully',
+			status: HttpStatus.CREATED,
+		};
 	}
 
-	@Get()
-	findAll() {
-		return this.userService.findAll();
-	}
+	@Get('/:id')
+	@UseGuards(JwtGuard)
+	public async find(@Param('id') id: string) {
+		const user = await this.userService.findOne(+id);
 
-	@Get('/userType/:name')
-	findOneByNameUserType(@Param('name') name: string) {
-		return this.userService.findOneByNameUserType(name);
+		return {
+			data: user,
+			message: 'User finded successfully',
+			status: HttpStatus.OK,
+		};
 	}
-
-	@Get(':id')
-	findOne(@Param('id') id: string) {
-		return this.userService.findOne(+id);
-	}
+	
 }

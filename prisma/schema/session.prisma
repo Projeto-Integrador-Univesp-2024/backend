@@ -1,0 +1,11 @@
+model Session {
+    id           Int       @id @default(autoincrement())
+    userId       Int
+    expires      DateTime  @db.Timestamptz()
+    sessionToken String    @db.Text
+    createdAt    DateTime  @default(now())
+    updatedAt    DateTime  @updatedAt
+    deletedAt    DateTime?
+
+    user User @relation(fields: [userId], references: [id])
+}

@@ -1,56 +1,49 @@
-import {
-	Controller,
-	Get,
-	Post,
-	Body,
-	Patch,
-	Param,
-	Delete,
-} from '@nestjs/common';
+import { Controller, Post, Body, HttpStatus } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { ValidateEmailAuthDto } from './dto/validate-email-auth.dto';
-import { ValidateOTPAuthDto } from './dto/validate-otp-auth.dto';
+import { LoginAuthDto } from './dto/login-auth.dto';
+import { ValidateAuthDto } from './dto/validate-auth.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
-	@Post()
-	create(@Body() _createAuthDto: CreateAuthDto) {
-		return this.authService.create(_createAuthDto);
-	}
-
 	@Post('/login')
-	validateEmail(@Body() _validateEmailAuthDto: ValidateEmailAuthDto) {
-		return this.authService.validateEmail(_validateEmailAuthDto.email);
+	public async login(@Body() _loginAuthDto: LoginAuthDto) {
+		const auth = await this.authService.login(_loginAuthDto);
+
+		if (!auth) {
+			return {
+				data: null,
+				message: 'User authenticated error',
+				status: HttpStatus.CONFLICT,
+			};
+		}
+
+		return {
+			data: auth,
+			message: 'User authenticated succesfully',
+			status: HttpStatus.OK,
+		};
 	}
 
-	@Post('/login/confirmation')
-	validateOTP(@Body() _validateOTPAuthDto: ValidateOTPAuthDto) {
-		return this.authService.validateOTP(_validateOTPAuthDto);
-	}
+	@Post('/validate')
+	public async revalidateAuth(@Body() _validateAuthDto: ValidateAuthDto) {
+		const auth = await this.authService.validate(_validateAuthDto);
 
-	@Get()
-	findAll() {
-		return this.authService.findAll();
-	}
+		if (!auth) {
+			return {
+				data: null,
+				message: 'User authenticated error',
+				status: HttpStatus.CONFLICT,
+			};
+		}
 
-	@Get(':email')
-	findByEmail(@Param('email') email: string) {
-		return this.authService.findOneByEmail(email);
-	}
-
-	@Patch(':id')
-	update(@Param('id') id: string, @Body() _updateAuthDto: UpdateAuthDto) {
-		return this.authService.update(+id, _updateAuthDto);
-	}
-
-	@Delete(':id')
-	remove(@Param('id') id: string) {
-		return this.authService.remove(+id);
+		return {
+			data: auth,
+			message: 'User validated succesfully',
+			status: HttpStatus.OK,
+		};
 	}
 }
