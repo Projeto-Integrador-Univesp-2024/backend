@@ -1,0 +1,11 @@
+model Exchange {
+    id        Int       @id @default(autoincrement())
+    childId   Int
+    productId Int
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    child Child @relation(fields: [childId], references: [id])
+	product Product @relation(fields: [productId], references: [id])
+}

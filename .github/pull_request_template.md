@@ -1,20 +1,20 @@
-# Solicitação de Pull Request
+# Pull Request
 
-## Descrição das Alterações
+## Description of Changes
 
- - Breve descrição das alterações realizadas nesta pull request. 
+ - Brief description of the changes made in this pull request.
 
-## Link da Task
-[Link para a tarefa ou issue relacionada](URL_DA_TAREFA) 
+## Task Link
+[Link to the related task or issue](TASK_URL) 
 
-## Evidências
-<!-- Anexe evidências relevantes, como capturas de tela ou gifs, que demonstrem as mudanças realizadas. -->
+## Evidences
+<!-- Attach relevant evidence, such as screenshots or gifs, that demonstrate the changes made. -->
 \**
 \**
 
-## Comentários *(opcional)*
-<!-- Adicione comentários adicionais, se necessário, para explicar decisões de implementação ou qualquer informação relevante. -->
+## Comments *(optional)*
+<!-- Add additional comments if necessary to explain implementation decisions or any relevant information. -->
 
- - [ ] Lint <!-- Rodou o lint? -->
- - [ ] Evidências <!-- Colocou evidências? -->
- - [ ] Finalizado <!-- Tem dependência de externos? -->
+ - [ ] Lint <!-- Did you run lint? -->
+ - [ ] Evidences <!-- Did you provide evidence? -->
+ - [ ] Completed <!-- Is there any external dependency? -->

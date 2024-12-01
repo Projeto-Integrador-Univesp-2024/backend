@@ -1,13 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsOptional } from 'class-validator';
+import {
+	IsBoolean,
+	IsInt,
+	IsOptional,
+	IsString,
+	IsUUID,
+} from 'class-validator';
+import { CreateUserDto } from 'src/modules/user/dto/create-user.dto';
 
-export class CreateChildDto {
+export class CreateChildDto extends CreateUserDto {
 	@ApiProperty()
-	@IsInt()
-	userId: number;
+	@IsString()
+	@IsUUID()
+	guardianId: string;
 
 	@ApiProperty()
 	@IsInt()
 	@IsOptional()
 	points?: number;
+
+	@ApiProperty()
+	@IsBoolean()
+	@IsOptional()
+	tasksNeedsApproval: boolean;
 }
