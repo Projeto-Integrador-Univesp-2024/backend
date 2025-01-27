@@ -1,4 +1,4 @@
-model Exchange {
+model exchange {
     id        Int       @id @default(autoincrement())
     childId   Int
     productId Int
@@ -6,6 +6,6 @@ model Exchange {
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
 
-    child Child @relation(fields: [childId], references: [id])
-	product Product @relation(fields: [productId], references: [id])
+    child   child   @relation(fields: [childId], references: [id])
+    product product @relation(fields: [productId], references: [id])
 }

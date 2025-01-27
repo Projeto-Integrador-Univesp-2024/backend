@@ -1,4 +1,4 @@
-model User {
+model user {
     id            Int       @id @default(autoincrement())
     publicId      String    @unique @default(uuid())
     userTypeId    Int
@@ -12,13 +12,13 @@ model User {
     updatedAt     DateTime  @updatedAt
     deletedAt     DateTime?
 
-    session   Session[]
-    children  Child?     @relation("UserChild") // Relacionamento como "user"
-    guardians Child[]    @relation("UserGuardian") // Relacionamento como "guardian"
-    products  Product[]
-    taskTypes TaskType[]
+    session   session[]
+    children  child?      @relation("UserChild") // Relacionamento como "user"
+    guardians child[]     @relation("UserGuardian") // Relacionamento como "guardian"
+    products  product[]
+    taskTypes task_type[]
 
-    userType UserType @relation(fields: [userTypeId], references: [id])
+    userType user_type @relation(fields: [userTypeId], references: [id])
 
     @@unique([userTypeId, email])
     @@index([userTypeId, email])

@@ -1,4 +1,4 @@
-model Child {
+model child {
     id                 Int       @id @default(autoincrement())
     userChildId        Int       @unique
     userGuardianId     Int
@@ -9,13 +9,13 @@ model Child {
     deletedAt          DateTime?
 
     // Relacionamento com Users como "user"
-    user User @relation("UserChild", fields: [userChildId], references: [id])
+    user user @relation("UserChild", fields: [userChildId], references: [id])
 
     // Relacionamento com Users como "guardian"
-    guardian User @relation("UserGuardian", fields: [userGuardianId], references: [id])
+    guardian user @relation("UserGuardian", fields: [userGuardianId], references: [id])
 
-    tasks    Task[]
-    goals    Goal[]
-    store    Store?
-    exchange Exchange[]
+    tasks    task[]
+    goals    goal[]
+    store    store?
+    exchange exchange[]
 }

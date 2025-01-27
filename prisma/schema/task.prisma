@@ -4,7 +4,7 @@ enum TaskStatus {
     FAILED
 }
 
-model Task {
+model task {
     id         Int        @id @default(autoincrement())
     childId    Int
     taskTypeId Int?
@@ -16,6 +16,6 @@ model Task {
     updatedAt  DateTime   @updatedAt
     deletedAt  DateTime?
 
-    child     Child     @relation(fields: [childId], references: [id])
-    tasktypes TaskType? @relation(fields: [taskTypeId], references: [id])
+    child     child      @relation(fields: [childId], references: [id])
+    tasktypes task_type? @relation(fields: [taskTypeId], references: [id])
 }

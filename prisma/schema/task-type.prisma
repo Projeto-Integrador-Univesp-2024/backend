@@ -5,7 +5,7 @@ enum RecurrenceType {
     YEAR
 }
 
-model TaskType {
+model task_type {
     id             Int            @id @default(autoincrement())
     name           String         @db.VarChar(50)
     recurrence     Int            @default(1)
@@ -15,7 +15,7 @@ model TaskType {
     createdAt      DateTime       @default(now())
     updatedAt      DateTime       @updatedAt
     deletedAt      DateTime?
-    tasks          Task[]
+    tasks          task[]
 
-    user User @relation(fields: [guardianId], references: [id])
+    user user @relation(fields: [guardianId], references: [id])
 }

@@ -1,73 +1,133 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# **Documentação do Backend**
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Bem-vindo à documentação oficial do projeto **Jornada na Educação Financeira Infantil**. 
+Este documento detalha os principais aspectos técnicos, endpoints da API, configurações e como executar o ambiente de desenvolvimento.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## **1. Visão Geral**
+- **Linguagem**: Typescript
+- **Framework**: NestJS
+- **Banco de Dados**: PostgreSQL (usando o Prisma ORM)
+- **Autenticação**: JWT
+- **Outras Tecnologias**: 
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Installation
-
-```bash
-$ yarn install
+## **2. Estrutura do Projeto**
+A estrutura do backend segue boas práticas de modularização e organização:
+```
+└── 📁backend
+	└── 📁.github
+		└── pull_request_template.md
+	└── 📁prisma
+		└── 📁migrations
+		└── 📁schema
+		└── seed.ts
+		└── 📁seeds
+	└── 📁src
+		└── app.module.ts
+		└── 📁config
+			└── configuration.ts
+		└── 📁database
+			└── prisma.module.ts
+			└── prisma.service.ts
+			└── 📁messages
+				└── email.ts
+				└── swagger.ts
+			└── utils.interface.ts
+			└── utils.module.ts
+			└── utils.service.ts
+		└── 📁enums
+		└── 📁global-jwt
+		└── 📁guards
+		└── 📁interceptors
+		└── main.ts
+		└── 📁modules
+			└── 📁auth
+				└── auth.controller.ts
+				└── auth.d.ts
+				└── auth.module.ts
+				└── auth.service.ts
+			└── 📁dto
+				└── login-auth.dto.ts
+				└── validate-auth.dto.ts
+			└── 📁child
+			└── 📁goal
+			└── 📁mail
+			└── 📁metrics
+			└── 📁product
+			└── 📁session
+			└── 📁store
+			└── 📁task
+			└── 📁task-type
+			└── 📁user
+		└── 📁test
+	└── .env
+	└── dockerfile
+	└── nest-cli.json
+	└── package.json
+	└── README.md
 ```
 
-## Running the app
+---
 
+## **3. Endpoints da API**
+
+Para ver os enpoints e suas documentações rode o projeto e abra a página [http://localhost:5000/docs](http://localhost:5000/docs)
+
+---
+
+## **4. Configuração do Ambiente**
+
+### **4.1 Pré-requisitos**
+- Node.js v18 ou superior
+- Banco de dados PostgreSQL (Para entender como rodar o banco, abra a documentação do [Docker](https://github.com/Projeto-Integrador-Univesp-2024/docker))
+
+### **4.2 Variáveis de Ambiente**
+Crie um arquivo `.env` na raiz do projeto seguindo o formato do .env.example
+
+### **4.3 Executando o Projeto**
+1. Clone o projeto:
+	```bash
+			git clone https://github.com/Projeto-Integrador-Univesp-2024/backend.git
+		```
+2. Entre na raiz do projeto:
+	```bash
+		cd backend
+	```
+3. Instale as dependências:
+	```bash
+		npm install
+	```
+4. Gere os arquivos do Prisma:
+	```bash
+		npx prisma generate
+	```
+5. Rode o Seed:
+	```bash
+		npx prisma db seed
+	```
+6. Execute o servidor
+	```bash
+		npm run start:dev
+	```
+	
+---
+
+## **5. Testes**
+Para rodar os testes:
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+	npm run test
 ```
 
-## Test
+---
 
-```bash
-# unit tests
-$ yarn run test
+## **6. Boas Práticas**
+- Utilize mensagens de commit padronizadas
+- Execute npm run lint antes de criar um pull request.
+- Crie o commit com o comando `npm run commit`
 
-# e2e tests
-$ yarn run test:e2e
+---
 
-# test coverage
-$ yarn run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+© 2025 Jornada na Educação Financeira Infantil. Todos os direitos reservados.

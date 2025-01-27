@@ -12,7 +12,7 @@ export class TaskTypeService {
 	}
 
 	public async findAll(guardianId: string) {
-		return await this.prisma.taskType.findMany({
+		return await this.prisma.task_type.findMany({
 			where: {
 				user: {
 					publicId: guardianId,
@@ -22,7 +22,7 @@ export class TaskTypeService {
 	}
 
 	public async findOne(id: number) {
-		return await this.prisma.taskType.findUnique({
+		return await this.prisma.task_type.findUnique({
 			where: {
 				id,
 			},

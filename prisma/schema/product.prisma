@@ -1,4 +1,4 @@
-model Product {
+model product {
     id         Int       @id @default(autoincrement())
     publicId   String    @unique @default(uuid())
     guardianId Int
@@ -9,8 +9,8 @@ model Product {
     updatedAt  DateTime  @updatedAt
     deletedAt  DateTime?
 
-    guardian User @relation(fields: [guardianId], references: [id])
+    guardian user @relation(fields: [guardianId], references: [id])
 
-    productStore ProductStore[]
-    exchange     Exchange[]
+    productStore product_store[]
+    exchange     exchange[]
 }
