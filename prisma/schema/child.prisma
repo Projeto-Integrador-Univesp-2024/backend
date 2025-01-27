@@ -1,0 +1,21 @@
+model child {
+    id                 Int       @id @default(autoincrement())
+    userChildId        Int       @unique
+    userGuardianId     Int
+    points             Int       @default(0)
+    tasksNeedsApproval Boolean   @default(true)
+    createdAt          DateTime  @default(now())
+    updatedAt          DateTime  @updatedAt
+    deletedAt          DateTime?
+
+    // Relacionamento com Users como "user"
+    user user @relation("UserChild", fields: [userChildId], references: [id])
+
+    // Relacionamento com Users como "guardian"
+    guardian user @relation("UserGuardian", fields: [userGuardianId], references: [id])
+
+    tasks    task[]
+    goals    goal[]
+    store    store?
+    exchange exchange[]
+}

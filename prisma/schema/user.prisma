@@ -1,0 +1,25 @@
+model user {
+    id            Int       @id @default(autoincrement())
+    publicId      String    @unique @default(uuid())
+    userTypeId    Int
+    name          String?   @db.VarChar(100)
+    email         String    @db.VarChar(100)
+    password      String    @db.VarChar(255)
+    emailVerified DateTime? @db.Timestamptz()
+    dateOfBirth   DateTime
+    image         String?
+    createdAt     DateTime  @default(now())
+    updatedAt     DateTime  @updatedAt
+    deletedAt     DateTime?
+
+    session   session[]
+    children  child?      @relation("UserChild") // Relacionamento como "user"
+    guardians child[]     @relation("UserGuardian") // Relacionamento como "guardian"
+    products  product[]
+    taskTypes task_type[]
+
+    userType user_type @relation(fields: [userTypeId], references: [id])
+
+    @@unique([userTypeId, email])
+    @@index([userTypeId, email])
+}

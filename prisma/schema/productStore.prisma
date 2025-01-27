@@ -1,0 +1,12 @@
+model product_store {
+    id        Int       @id @default(autoincrement())
+    storeId   Int
+    productId Int
+    stock     Int
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    store   store   @relation(fields: [storeId], references: [id])
+    product product @relation(fields: [productId], references: [id])
+}

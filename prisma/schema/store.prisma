@@ -1,0 +1,11 @@
+model store {
+    id        Int       @id @default(autoincrement())
+    childId   Int       @unique
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    deletedAt DateTime?
+
+    child child @relation(fields: [childId], references: [id])
+
+    productStore product_store[]
+}

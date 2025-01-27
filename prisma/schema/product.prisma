@@ -1,0 +1,16 @@
+model product {
+    id         Int       @id @default(autoincrement())
+    publicId   String    @unique @default(uuid())
+    guardianId Int
+    name       String    @db.VarChar(50)
+    image      String
+    points     Int
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+    deletedAt  DateTime?
+
+    guardian user @relation(fields: [guardianId], references: [id])
+
+    productStore product_store[]
+    exchange     exchange[]
+}
