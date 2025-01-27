@@ -1,22 +1,24 @@
-FROM node:20 AS development
+FROM node:18 AS development
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install --only=development
+RUN npm install
 
 COPY . .
 
-RUN npm run build
+EXPOSE 3000 9229
 
-RUN npx prisma generate
+# RUN npm run build
 
-USER root
+# RUN npx prisma generate
+
+# USER root
 
 CMD ["npm", "run", "start:dev"]
 
-FROM node:20 AS production
+FROM node:18 AS production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}

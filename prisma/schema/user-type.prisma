@@ -1,10 +1,10 @@
-model UserType {
+model user_type {
     id        Int       @id @default(autoincrement())
     name      String    @db.VarChar(255)
     createdAt DateTime  @default(now())
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
-    user     User[]
+    user      user[]
 
     @@unique([name])
 }

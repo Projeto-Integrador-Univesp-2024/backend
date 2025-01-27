@@ -11,21 +11,21 @@ export async function UserTypeSeed(
 	prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
 ) {
 	try {
-		const admin = await prisma.userType.create({
+		const admin = await prisma.user_type.create({
 			data: {
 				id: 1,
 				name: UserTypes.ADMIN,
 			},
 		});
 
-		const guardian = await prisma.userType.create({
+		const guardian = await prisma.user_type.create({
 			data: {
 				id: 2,
 				name: UserTypes.GUARDIAN,
 			},
 		});
 
-		const child = await prisma.userType.create({
+		const child = await prisma.user_type.create({
 			data: {
 				id: 3,
 				name: UserTypes.CHILD,

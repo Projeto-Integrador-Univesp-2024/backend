@@ -1,4 +1,4 @@
-model Goal {
+model goal {
     id        Int       @id @default(autoincrement())
     childId   Int
     title     String    @db.VarChar(50)
@@ -7,7 +7,7 @@ model Goal {
     updatedAt DateTime  @updatedAt
     deletedAt DateTime?
 
-    child Child @relation(fields: [childId], references: [id])
+    child child @relation(fields: [childId], references: [id])
 
     @@unique([childId, title])
 }

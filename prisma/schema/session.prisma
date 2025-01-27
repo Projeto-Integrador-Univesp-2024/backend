@@ -1,4 +1,4 @@
-model Session {
+model session {
     id           Int       @id @default(autoincrement())
     userId       Int
     expires      DateTime  @db.Timestamptz()
@@ -7,5 +7,5 @@ model Session {
     updatedAt    DateTime  @updatedAt
     deletedAt    DateTime?
 
-    user User @relation(fields: [userId], references: [id])
+    user user @relation(fields: [userId], references: [id])
 }
